@@ -1,8 +1,7 @@
-// components/Button.tsx
 import React, { ButtonHTMLAttributes } from "react";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  variant?: "primary" | "secondary"; // Варианты стилей кнопки
+  variant?: "primary" | "secondary";
 }
 
 const Button: React.FC<ButtonProps> = ({

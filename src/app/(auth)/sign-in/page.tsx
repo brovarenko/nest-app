@@ -5,7 +5,7 @@ import SignIn from "@/app/components/SignIn";
 const page: FC = ({}) => {
   return (
     <div className='absolute inset-0'>
-      <div className='h-full max-w-2xl flex flex-col items-center justify-center gap-20'>
+      <div className='h-full max-w-2xl flex flex-col items-center justify-center gap-20 bg-slate-50'>
         <Link href='/'>Home</Link>
         <SignIn />
       </div>

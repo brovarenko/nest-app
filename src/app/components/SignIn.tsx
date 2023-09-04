@@ -1,7 +1,7 @@
 import { FC } from "react";
 import Link from "next/link";
 import AuthForm from "./AuthForm";
-import Button from "./Button";
+import Button from "./common/Button";
 interface SignInProps {}
 
 const SignIn: FC<SignInProps> = ({}) => {

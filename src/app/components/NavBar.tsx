@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Button from "./Button";
 
 const NavBar = async () => {
   return (
@@ -8,10 +9,8 @@ const NavBar = async () => {
           <Link href='/'>
             <p className='text-white text-2xl font-semibold'>Blog</p>
           </Link>
-          <Link href='/signin'>
-            <div className='text-white hover:bg-orange-600 bg-orange-500 rounded-md px-4 py-2'>
-              Sign In
-            </div>
+          <Link href='/sign-in'>
+            <Button>Sign In</Button>
           </Link>
         </div>
       </div>

@@ -1,8 +1,9 @@
 "use client";
 import { FC, useState } from "react";
-import { signIn } from "next-auth/react";
+import { signIn, signOut } from "next-auth/react";
 import Button from "./common/Button";
 import { useToast } from "@chakra-ui/react";
+import Image from "next/image";
 interface AuthFormProps {}
 
 const AuthForm: FC<AuthFormProps> = ({}) => {
@@ -11,7 +12,6 @@ const AuthForm: FC<AuthFormProps> = ({}) => {
   const LoginWithGoogle = async () => {
     setIsLoading(true);
     try {
-      throw new Error("error");
       await signIn("google");
     } catch (error) {
       toast({
@@ -26,10 +26,12 @@ const AuthForm: FC<AuthFormProps> = ({}) => {
     }
   };
   return (
-    <div>
+    <div className='flex justify-center'>
       <Button onClick={LoginWithGoogle} variant='secondary'>
-        Google
+        <Image src='/icons/google.png' alt='google' width={15} height={15} />
+        <div className='pl-2'>Google</div>
       </Button>
+      <button onClick={() => signOut()}>Sign out</button>
     </div>
   );
 };

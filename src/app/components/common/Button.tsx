@@ -9,11 +9,12 @@ const Button: React.FC<ButtonProps> = ({
   variant = "primary",
   ...props
 }) => {
-  const baseClasses = "px-4 py-2 rounded-md focus:outline-none";
+  const baseClasses =
+    "flex justify-items-center items-center px-4 py-2 rounded-md focus:outline-none";
 
   const variantClasses = {
     primary: "bg-orange-500 hover:bg-orange-600 text-white",
-    secondary: "bg-gray-700 hover:bg-gray-800 text-white",
+    secondary: "bg-gray-800 hover:bg-gray-900 text-white",
   };
 
   const classes = `${baseClasses} ${variantClasses[variant]}`;

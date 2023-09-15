@@ -31,7 +31,6 @@ const AuthForm: FC<AuthFormProps> = ({}) => {
         <Image src='/icons/google.png' alt='google' width={15} height={15} />
         <div className='pl-2'>Google</div>
       </Button>
-      <button onClick={() => signOut()}>Sign out</button>
     </div>
   );
 };

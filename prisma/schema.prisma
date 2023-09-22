@@ -7,6 +7,11 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+enum VoteType {
+  UP
+  DOWN
+}
+
 model Account {
   id                 String  @id @default(auto()) @map("_id") @db.ObjectId
   userId             String  @db.ObjectId
@@ -27,7 +32,7 @@ model Account {
 }
 
 model Session {
-  id           String  @id @default(auto()) @map("_id") @db.ObjectId
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
   sessionToken String   @unique
   userId       String   @db.ObjectId
   expires      DateTime
@@ -35,12 +40,85 @@ model Session {
 }
 
 model User {
-  id            String  @id @default(auto()) @map("_id") @db.ObjectId
-  name          String?
-  username      String?   @unique
-  email         String?   @unique
-  emailVerified DateTime?
-  image         String?
-  accounts      Account[]
-  sessions      Session[]
+  id                String         @id @default(auto()) @map("_id") @db.ObjectId
+  name              String?
+  email             String?        @unique
+  emailVerified     DateTime?
+  createdGroups     Group[]        @relation("CreatedBy")
+  subscriptions     Subscription[]
+  votes             Vote[]
+  username          String?        @unique
+  image             String?
+  accounts          Account[]
+  sessions          Session[]
+  post              Post[]
+  comment           Comment[]
+  commentVote       CommentVote[]
+}
+
+
+model Group {
+  id          String         @id @default(auto()) @map("_id") @db.ObjectId
+  name        String         @unique
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+  posts       Post[]
+  creatorId   String?        @db.ObjectId
+  creator     User?          @relation("CreatedBy", fields: [creatorId], references: [id])
+  subscribers Subscription[]
+}
+
+model Subscription {
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  user        User      @relation(fields: [userId], references: [id])
+  userId      String    @db.ObjectId
+  group       Group     @relation(fields: [groupId], references: [id])
+  groupId     String    @db.ObjectId
+}
+
+model Post {
+  id          String    @id @default(auto()) @map("_id") @db.ObjectId
+  title       String
+  content     Json?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+  author      User      @relation(fields: [authorId], references: [id])
+  authorId    String    @db.ObjectId
+  group       Group     @relation(fields: [groupId], references: [id])
+  groupId     String    @db.ObjectId
+  comments    Comment[] 
+  votes       Vote[]
+}
+
+model Comment {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  text      String
+  createdAt DateTime @default(now())
+  author    User     @relation(fields: [authorId], references: [id])
+  authorId  String   @db.ObjectId
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId    String   @db.ObjectId
+  replyToId String?  @db.ObjectId
+  replyTo   Comment?  @relation("ReplyTo", fields: [replyToId], references: [id], onDelete: NoAction, onUpdate: NoAction)
+  replies   Comment[] @relation("ReplyTo")
+  votes     CommentVote[]
+  commentId String?
+}
+
+model Vote {
+  id     String   @id @default(auto()) @map("_id") @db.ObjectId
+  user   User     @relation(fields: [userId], references: [id])
+  userId String   @db.ObjectId
+  post   Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId String   @db.ObjectId
+  type   VoteType
+}
+
+model CommentVote {
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  user      User     @relation(fields: [userId], references: [id])
+  userId    String   @db.ObjectId
+  comment   Comment  @relation(fields: [commentId], references: [id], onDelete: Cascade)
+  commentId String   @db.ObjectId
+  type      VoteType
 }

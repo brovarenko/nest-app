@@ -1,12 +1,16 @@
+"use client";
+import { Spinner } from "@chakra-ui/react";
 import React, { ButtonHTMLAttributes } from "react";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: "primary" | "secondary";
+  isLoading?: boolean;
 }
 
 const Button: React.FC<ButtonProps> = ({
   children,
   variant = "primary",
+  isLoading = false,
   ...props
 }) => {
   const baseClasses =
@@ -20,8 +24,8 @@ const Button: React.FC<ButtonProps> = ({
   const classes = `${baseClasses} ${variantClasses[variant]}`;
 
   return (
-    <button className={classes} {...props}>
-      {children}
+    <button className={classes} {...props} disabled={isLoading}>
+      {isLoading ? <Spinner /> : children}
     </button>
   );
 };

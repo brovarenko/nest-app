@@ -1,10 +1,11 @@
 "use client";
 import { FC, useState } from "react";
-import type { Session, User } from "next-auth";
+
 import Link from "next/dist/client/link";
 import { Avatar } from "@chakra-ui/react";
 import { signOut } from "next-auth/react";
 import { LogOut } from "lucide-react";
+import { User } from "next-auth";
 
 interface UserMenuProps {
   user: User;
@@ -26,6 +27,7 @@ const UserMenu: FC<UserMenuProps> = ({ user }) => {
           className='inline-flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-gray-800 rounded-md hover:bg-gray-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500'
         >
           <Avatar size='sm' src={user.image ? user?.image : ""} />
+          <div className='p-1'>{user.username ? user?.username : ""}</div>
           <svg
             xmlns='http://www.w3.org/2000/svg'
             className='w-5 h-5 ml-2 -mr-1 text-gray-400'

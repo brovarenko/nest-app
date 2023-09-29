@@ -1,16 +1,14 @@
 "use client";
 import Link from "next/link";
 import Button from "./common/Button";
-import { getAuthSession } from "../api/auth/[...nextauth]/route";
 import UserMenu from "./UserMenu";
 import Modal from "./common/Modal";
 import { useState } from "react";
 import { useSession } from "next-auth/react";
-import SignIn from "./SignIn";
 import AuthForm from "./AuthForm";
+import Image from "next/image";
 
 const NavBar = () => {
-  //const session = await getAuthSession();
   const { data: session } = useSession();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -22,18 +20,24 @@ const NavBar = () => {
     setIsModalOpen(false);
   };
   return (
-    <nav className='bg-gray-900 p-5'>
+    <nav className='bg-gray-100 p-3'>
       <div className='container mx-auto'>
-        <div className='flex items-center justify-between'>
-          <Link href='/'>
-            <p className='text-white text-2xl font-semibold'>Blog</p>
+        <div className='flex items-center justify-between content-center'>
+          <Link className='flex' href='/'>
+            <Image
+              src='/icons/reddit-logo.png'
+              alt='google'
+              width={40}
+              height={40}
+            />
+            <div className='text-black text-2xl font-semibold ml-1 self-center'>
+              Reddit
+            </div>
           </Link>
           {session ? (
             <UserMenu user={session.user} />
           ) : (
-            // <Link href='/sign-in'>
             <Button onClick={openModal}>Sign In</Button>
-            // </Link>
           )}
         </div>
       </div>

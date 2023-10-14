@@ -1,4 +1,5 @@
 import { getAuthSession } from "@/app/api/auth/[...nextauth]/route";
+import MiniCreatePost from "@/app/components/CreatePost";
 import { db } from "@/app/lib/db";
 import { notFound } from "next/navigation";
 import { FC } from "react";
@@ -33,7 +34,11 @@ const Page: FC<PageProps> = async ({ params }: PageProps) => {
   });
 
   if (!group) return notFound();
-  return <div>{group.name}</div>;
+  return (
+    <div className=''>
+      <MiniCreatePost session={session} />
+    </div>
+  );
 };
 
 export default Page;

@@ -14,11 +14,11 @@ const Button: React.FC<ButtonProps> = ({
   ...props
 }) => {
   const baseClasses =
-    "flex justify-items-center items-center px-4 py-2 rounded-full focus:outline-none w-full justify-center";
+    "flex justify-items-center items-center px-4 py-2 rounded-full w-full justify-center";
 
   const variantClasses = {
     primary: "bg-orange-500 hover:bg-orange-600 text-white",
-    secondary: "bg-gray-800 hover:bg-gray-900 text-white",
+    secondary: "bg-gray-500 hover:bg-gray-700 text-white",
   };
 
   const classes = `${baseClasses} ${variantClasses[variant]}`;

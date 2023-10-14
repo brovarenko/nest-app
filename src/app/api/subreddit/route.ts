@@ -1,7 +1,7 @@
 import { db } from "@/app/lib/db";
 import { z } from "zod";
 import { getAuthSession } from "../auth/[...nextauth]/route";
-import { GroupValidator } from "@/app/lib/validations/group";
+import { SubredditValidator } from "@/app/lib/validations/group";
 
 export async function POST(req: Request) {
   try {
@@ -12,7 +12,7 @@ export async function POST(req: Request) {
     }
 
     const body = await req.json();
-    const { name } = GroupValidator.parse(body);
+    const { name } = SubredditValidator.parse(body);
 
     const groupExists = await db.group.findFirst({
       where: {

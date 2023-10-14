@@ -24,7 +24,7 @@ const UserMenu: FC<UserMenuProps> = ({ user }) => {
         <button
           onClick={toggleMenu}
           type='button'
-          className='inline-flex justify-center w-full px-4 py-2 text-sm font-medium text-white bg-gray-800 rounded-md hover:bg-gray-900 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-blue-500'
+          className='inline-flex justify-center w-full px-4 py-2 text-sm font-medium  bg-gray-100 rounded-md border border-gray-100 hover:border-gray-300'
         >
           <Avatar size='sm' src={user.image ? user?.image : ""} />
           <div className='p-1'>{user.username ? user?.username : ""}</div>

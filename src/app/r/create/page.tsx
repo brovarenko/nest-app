@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { Input, useToast } from "@chakra-ui/react";
 import axios, { AxiosError } from "axios";
 import { useMutation } from "@tanstack/react-query";
-import { CreateGroupPayload } from "@/app/lib/validations/group";
+import { CreateSubredditPayload } from "@/app/lib/validations/group";
 
 const Page = () => {
   const toast = useToast();
@@ -14,11 +14,11 @@ const Page = () => {
 
   const { mutate: createCommunity, isLoading } = useMutation({
     mutationFn: async () => {
-      const payload: CreateGroupPayload = {
+      const payload: CreateSubredditPayload = {
         name: input,
       };
 
-      const { data } = await axios.post("/api/group", payload);
+      const { data } = await axios.post("/api/subreddit", payload);
       return data as string;
     },
     onError: (err) => {
@@ -55,7 +55,7 @@ const Page = () => {
       });
     },
     onSuccess: (data) => {
-      router.push(`/group/${data}`);
+      router.push(`/r/${data}`);
     },
   });
 

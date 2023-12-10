@@ -1,5 +1,6 @@
 import { getAuthSession } from "@/app/api/auth/[...nextauth]/route";
 import MiniCreatePost from "@/app/components/CreatePost";
+import PostFeed from "@/app/components/PostFeed";
 import { db } from "@/app/lib/db";
 import { notFound } from "next/navigation";
 import { FC } from "react";
@@ -37,6 +38,7 @@ const Page: FC<PageProps> = async ({ params }: PageProps) => {
   return (
     <div className=''>
       <MiniCreatePost session={session} />
+      <PostFeed />
     </div>
   );
 };

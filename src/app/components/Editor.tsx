@@ -10,7 +10,7 @@ import { usePathname, useRouter } from "next/navigation";
 import axios from "axios";
 import { useMutation } from "@tanstack/react-query";
 import { useToast } from "@chakra-ui/react";
-import { UploadButton, uploadFiles } from "../lib/uploadthing";
+import { UploadButton } from "../lib/uploadthing";
 
 type FormData = z.infer<typeof PostValidator>;
 
